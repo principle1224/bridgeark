@@ -101,9 +101,17 @@ Background.headparticle = function() {
       render();
    }
 
+   // 터치 이벤트 핸들러 추가
+$('.particlehead').on('touchstart touchmove', function(event) {
+   event.preventDefault();
+   var touch = event.originalEvent.touches[0];
+   mouseX = ( touch.clientX - windowHalfX ) / 2;
+   mouseY = ( touch.clientY - windowHalfY ) / 2;
+});
+
    function render() {
-      Background.camera.position.x += ( -(mouseX * .5) - Background.camera.position.x ) * .05;
-      Background.camera.position.y += ( (mouseY * .5) - Background.camera.position.y ) * .05;
+      Background.camera.position.x += ( -(mouseX * .5) - Background.camera.position.x ) * .10;
+      Background.camera.position.y += ( (mouseY * .5) - Background.camera.position.y ) * .10;
 
       Background.camera.lookAt( Background.scene.position );
 
@@ -114,6 +122,9 @@ Background.headparticle = function() {
 
    Background.animate();
 };
+
+
+
 
 
 Background.headparticle();
