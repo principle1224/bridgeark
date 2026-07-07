@@ -110,8 +110,8 @@ $('.particlehead').on('touchstart touchmove', function(event) {
 });
 
    function render() {
-      Background.camera.position.x += ( -(mouseX * .5) - Background.camera.position.x ) * .10;
-      Background.camera.position.y += ( (mouseY * .5) - Background.camera.position.y ) * .10;
+      Background.camera.position.x += ( -(mouseX * .5) - Background.camera.position.x ) * .03;
+      Background.camera.position.y += ( (mouseY * .5) - Background.camera.position.y ) * .03;
 
       Background.camera.lookAt( Background.scene.position );
 

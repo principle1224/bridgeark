@@ -1,0 +1,461 @@
+<!-- /*
+* BridgeArk — 무역 소싱 (Trade & Sourcing) page
+* Built on the "Strategy" template by Untree.co (CC BY 3.0)
+*/ -->
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="BridgeArk">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="중국 공장 직소싱 — 베어링·산업 부품을 한국 제조사에 직접 공급합니다. 품질·등급은 그대로, 유통 마진만 제거합니다." />
+  <meta name="keywords" content="중국 공장 직소싱, 베어링 수입, 산업부품 무역, 한중 무역, 직소싱 견적" />
+
+  <link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,900" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ===== Trade page — scoped custom styles (navy #21325E / gold #C6A971) ===== */
+    :root{ --navy:#21325E; --navy-deep:#13223D; --gold:#C6A971; --ink:#1b2a4a; --muted:#5a6a85; }
+    .trade-hero{ background:linear-gradient(180deg,#f7f8fb 0%,#eef1f6 100%); padding:150px 0 84px; text-align:center; }
+    .trade-eyebrow{ display:inline-block; font-family:'Inter',sans-serif; letter-spacing:.34em; font-size:.74rem; font-weight:600; color:var(--gold); text-transform:uppercase; margin-bottom:18px; }
+    .trade-hero h1{ font-weight:700; color:var(--navy-deep); font-size:clamp(1.9rem,4vw,3rem); line-height:1.28; word-break:keep-all; margin-bottom:22px; }
+    .trade-hero .lead{ color:var(--muted); font-size:clamp(1rem,2vw,1.2rem); max-width:760px; margin:0 auto 30px; word-break:keep-all; }
+    .form-chips{ font-family:'Inter',sans-serif; letter-spacing:.04em; color:var(--navy); font-weight:600; margin-top:26px; font-size:.98rem; }
+    .form-chips span{ display:inline-block; background:#fff; border:1px solid #dfe4ee; border-radius:999px; padding:7px 16px; margin:5px; box-shadow:0 4px 14px rgba(33,50,94,.05); }
+
+    .section-eyebrow{ display:block; text-align:center; font-family:'Inter',sans-serif; letter-spacing:.28em; font-size:.7rem; font-weight:600; color:var(--gold); text-transform:uppercase; margin-bottom:10px; }
+
+    /* factory gallery */
+    .factory-card{ }
+    .factory-photo{ position:relative; height:236px; background:#e9edf4; border-radius:10px; overflow:hidden; box-shadow:0 8px 24px rgba(33,50,94,.09); transition:transform .4s ease, box-shadow .4s ease; }
+    .factory-card:hover .factory-photo{ transform:translateY(-5px); box-shadow:0 16px 34px rgba(33,50,94,.16); }
+    .factory-photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+    .factory-ph{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:#9fb0c9; z-index:0; }
+    .factory-ph .num{ font-family:'Inter',sans-serif; font-weight:700; font-size:1.5rem; color:#c3ccda; }
+    .factory-ph .ph-label{ font-family:'Inter',sans-serif; letter-spacing:.2em; font-size:.66rem; text-transform:uppercase; }
+    .factory-cap{ margin-top:14px; }
+    .factory-cap .k{ display:block; font-weight:600; color:var(--navy); font-size:1.02rem; }
+    .factory-cap .e{ display:block; font-family:'Inter',sans-serif; letter-spacing:.14em; font-size:.66rem; text-transform:uppercase; color:var(--gold); margin-top:2px; }
+
+    /* item pills */
+    .item-pill{ background:#fff; border:1px solid #e6e9f0; border-radius:10px; padding:20px 18px; text-align:center; height:100%; box-shadow:0 6px 18px rgba(33,50,94,.05); transition:.3s; }
+    .item-pill:hover{ border-color:var(--gold); transform:translateY(-3px); }
+    .item-pill .t{ font-weight:600; color:var(--navy); font-size:1.05rem; }
+    .item-pill .d{ color:var(--muted); font-size:.86rem; margin-top:6px; }
+
+    /* process steps */
+    .proc-step{ text-align:center; padding:8px; }
+    .proc-num{ width:52px; height:52px; border-radius:50%; background:var(--navy); color:#fff; font-family:'Inter',sans-serif; font-weight:700; font-size:1.15rem; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+    .proc-step.alt .proc-num{ background:var(--gold); color:var(--navy-deep); }
+    .proc-step .pt{ font-weight:600; color:var(--navy); font-size:.98rem; word-break:keep-all; }
+
+    /* QCD cards */
+    .qcd-card{ background:#fff; border:1px solid #e6e9f0; border-left:4px solid var(--gold); border-radius:8px; padding:24px 22px; height:100%; box-shadow:0 6px 18px rgba(33,50,94,.05); }
+    .qcd-card .qk{ font-weight:700; color:var(--navy); font-size:1.12rem; }
+    .qcd-card .qs{ color:var(--gold); font-family:'Inter',sans-serif; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; margin:2px 0 12px; }
+    .qcd-card .qd{ color:var(--muted); font-size:.94rem; line-height:1.7; word-break:keep-all; }
+
+    /* CTA band */
+    .trade-cta{ background:var(--navy); border-top:4px solid var(--gold); padding:66px 0; text-align:center; color:#fff; }
+    .trade-cta h2{ color:#fff; font-weight:700; font-size:clamp(1.4rem,3vw,2rem); word-break:keep-all; margin-bottom:14px; }
+    .trade-cta p{ color:var(--gold); margin-bottom:26px; }
+    .trade-cta .btn-gold{ background:var(--gold); color:var(--navy-deep); font-weight:600; border:0; padding:14px 30px; border-radius:6px; }
+    .trade-cta .btn-gold:hover{ background:#d8bd8a; }
+
+    /* 단가 경쟁력 — 가격 스택 비교 */
+    .cost-badge{ display:inline-block; background:var(--navy); color:#fff; font-weight:700; border-radius:999px; padding:11px 28px; font-size:1.02rem; box-shadow:0 8px 22px rgba(28,42,78,.18); }
+    .cost-badge b{ color:var(--gold); }
+    .cost-compare{ display:flex; align-items:stretch; justify-content:center; gap:20px; }
+    .cost-col{ flex:0 0 214px; display:flex; flex-direction:column; }
+    .cost-col .cl{ text-align:center; font-weight:700; font-size:1.05rem; margin-bottom:16px; }
+    .cost-stackwrap{ flex:1; display:flex; flex-direction:column; justify-content:flex-end; box-shadow:0 10px 26px rgba(28,42,78,.10); border-radius:8px; overflow:hidden; }
+    .cost-seg{ color:#fff; font-weight:600; font-size:.9rem; display:flex; align-items:center; justify-content:center; text-align:center; border-bottom:2px solid #fff; word-break:keep-all; }
+    .cost-cap{ text-align:center; margin-top:14px; font-style:italic; font-size:.95rem; }
+    .cost-mid{ flex:0 0 84px; display:flex; align-items:center; justify-content:center; }
+    @media (max-width:575.98px){
+      .cost-compare{ gap:6px; }
+      .cost-col{ flex:1 1 40%; }
+      .cost-mid{ flex:0 0 40px; }
+      .cost-seg{ font-size:.72rem; }
+      .cost-col .cl{ font-size:.86rem; }
+      .cost-mid svg{ width:34px; }
+    }
+  </style>
+
+  <title>BridgeArk &mdash; 무역 소싱 · 중국 공장 직소싱</title>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <div class="top-bar py-2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 text-center text-lg-right order-lg-2">
+            <ul class="social-media m-0 p-0">
+              <li><a href="#" class="p-2"><span class="icon-instagram"></span></a></li>
+              <li><a href="#" class="p-2"><span class="icon-linkedin"></span></a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 text-center text-lg-left">
+            <p class="mb-0">한·중을 잇는 비즈니스 브릿지 &mdash; 무역 · 광고 · 파트너십</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-11 col-xl-2">
+            <h1 class="mb-0 site-logo"><a href="index.html" class="mb-0">BridgeArk<span class="text-primary">.</span></a></h1>
+          </div>
+          <div class="col-12 col-md-10 d-none d-xl-block">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                <li><a href="index.html#home-section" class="nav-link">홈</a></li>
+                <li><a href="trade.html" class="nav-link active">무역 소싱</a></li>
+                <li><a href="index.html#services-section" class="nav-link">광고·마케팅</a></li>
+                <li class="has-children">
+                  <a href="index.html#about-section" class="nav-link">소개</a>
+                  <ul class="dropdown">
+                    <li><a href="index.html#about-section">에이전시 소개</a></li>
+                    <li><a href="index.html#team-section">팀 소개</a></li>
+                  </ul>
+                </li>
+                <li><a href="index.html#contact-section" class="nav-link">문의하기</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="trade-hero">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-10" data-aos="fade-up">
+            <span class="trade-eyebrow">Trade &amp; Sourcing</span>
+            <h1>중국 공장에서 직접.<br>품질·등급은 그대로, 유통 마진만 제거합니다.</h1>
+            <p class="lead">쓰시던 형번·등급·밀봉 사양 그대로 &mdash; 중국 공장과 직거래로 단가만 낮춥니다. 베어링·산업 부품을 한국 제조사에 직접 공급합니다.</p>
+            <div class="mb-2"><a href="#trade-contact" class="btn btn-primary btn-md">비교 견적 문의</a></div>
+            <div class="form-chips">
+              <span>6205 2RS</span><span>30206</span><span>6300ZZ</span><span>P0 / P6 · GCr15</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FACTORY GALLERY -->
+    <section class="site-section" id="factory">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-8 text-center" data-aos="fade-up">
+            <span class="section-eyebrow">Our Partner Factories</span>
+            <h2 class="site-section-heading">우리가 거래하는 공장</h2>
+            <p class="lead">실제 소싱과 검품이 이루어지는 현장입니다. 형번 접수부터 출하 전 검품까지, 전 과정을 직접 관리합니다.</p>
+          </div>
+        </div>
+        <div class="row">
+          <!-- factory1 ~ factory6 : assets/factory/factory1.jpg ... factory6.jpg 를 넣으면 자동 표시됩니다 -->
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="factory-card">
+              <div class="factory-photo">
+                <span class="factory-ph"><span class="num">01</span><span class="ph-label">Factory Exterior</span></span>
+                <img src="assets/factory/factory1.jpg" alt="공장 외관" onerror="this.style.display='none'">
+              </div>
+              <div class="factory-cap"><span class="k">공장 외관</span><span class="e">Factory Exterior</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="60">
+            <div class="factory-card">
+              <div class="factory-photo">
+                <span class="factory-ph"><span class="num">02</span><span class="ph-label">Production Line</span></span>
+                <img src="assets/factory/factory2.jpg" alt="생산 라인" onerror="this.style.display='none'">
+              </div>
+              <div class="factory-cap"><span class="k">생산 라인</span><span class="e">Production Line</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="120">
+            <div class="factory-card">
+              <div class="factory-photo">
+                <span class="factory-ph"><span class="num">03</span><span class="ph-label">Products</span></span>
+                <img src="assets/factory/factory3.jpg" alt="제품 (베어링)" onerror="this.style.display='none'">
+              </div>
+              <div class="factory-cap"><span class="k">제품 &middot; 베어링</span><span class="e">Products</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="0">
+            <div class="factory-card">
+              <div class="factory-photo">
+                <span class="factory-ph"><span class="num">04</span><span class="ph-label">Inspection</span></span>
+                <img src="assets/factory/factory4.jpg" alt="검품 · 품질 관리" onerror="this.style.display='none'">
+              </div>
+              <div class="factory-cap"><span class="k">검품 &middot; 품질 관리</span><span class="e">Inspection &amp; QC</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="60">
+            <div class="factory-card">
+              <div class="factory-photo">
+                <span class="factory-ph"><span class="num">05</span><span class="ph-label">Inventory</span></span>
+                <img src="assets/factory/factory5.jpg" alt="재고" onerror="this.style.display='none'">
+              </div>
+              <div class="factory-cap"><span class="k">재고 &middot; 상시 공급</span><span class="e">Inventory</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="120">
+            <div class="factory-card">
+              <div class="factory-photo">
+                <span class="factory-ph"><span class="num">06</span><span class="ph-label">Meeting</span></span>
+                <img src="assets/factory/factory6.jpg" alt="상담 · 미팅" onerror="this.style.display='none'">
+              </div>
+              <div class="factory-cap"><span class="k">상담 &middot; 미팅</span><span class="e">Meeting</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center">
+            <p class="text-muted small mb-0">* 실제 소싱·거래 공장의 현장 이미지입니다. 세부 사양·거래 조건은 문의 시 안내드립니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 단가 경쟁력 -->
+    <section class="site-section">
+      <div class="container">
+        <div class="row justify-content-center mb-4">
+          <div class="col-md-9 text-center" data-aos="fade-up">
+            <span class="section-eyebrow">Cost Advantage</span>
+            <h2 class="site-section-heading">단가 경쟁력의 근거</h2>
+            <p class="lead">품질을 낮춘 것이 아니라, 중간 유통 단계를 제거한 것입니다.</p>
+          </div>
+        </div>
+        <div class="row justify-content-center mb-5">
+          <div class="col-auto text-center" data-aos="fade-up">
+            <span class="cost-badge">중간 유통 <b>3단계</b> 제거</span>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12" data-aos="fade-up">
+            <div class="cost-compare">
+              <div class="cost-col">
+                <div class="cl" style="color:var(--navy);">기존 유통 경로</div>
+                <div class="cost-stackwrap">
+                  <div class="cost-seg" style="background:var(--gold);height:50px;">+ 유통상 마진</div>
+                  <div class="cost-seg" style="background:#5A6E96;height:50px;">+ 한국 수입상</div>
+                  <div class="cost-seg" style="background:#3C5488;height:50px;">+ 중국 무역상</div>
+                  <div class="cost-seg" style="background:var(--navy);height:170px;">공장 출고가</div>
+                </div>
+                <div class="cost-cap" style="color:var(--muted);">= 시중 구매가</div>
+              </div>
+              <div class="cost-mid">
+                <svg width="54" height="24" viewBox="0 0 54 24" aria-hidden="true"><line x1="2" y1="12" x2="42" y2="12" stroke="#C9A24B" stroke-width="3"/><path d="M40 5 L52 12 L40 19" fill="none" stroke="#C9A24B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="cost-col">
+                <div class="cl" style="color:var(--gold);">BridgeArk 직거래</div>
+                <div class="cost-stackwrap">
+                  <div class="cost-seg" style="background:var(--gold);height:50px;">+ BridgeArk 수수료</div>
+                  <div class="cost-seg" style="background:var(--navy);height:170px;">공장 출고가</div>
+                </div>
+                <div class="cost-cap" style="color:var(--gold);font-weight:700;">= 공급가</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+          <div class="col-md-9 text-center">
+            <p class="text-muted small mb-0">* 구조 설명을 위한 예시이며, 실제 절감폭은 품목·수량에 따라 달라집니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 취급 품목 -->
+    <section class="site-section border-bottom" style="background:#f7f8fb;">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-8 text-center" data-aos="fade-up">
+            <span class="section-eyebrow">Product Lineup</span>
+            <h2 class="site-section-heading">취급 품목</h2>
+            <p class="lead">베어링을 중심으로, 반복 수요가 있는 산업 부품·소모품으로 확장합니다.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up"><div class="item-pill"><div class="t">베어링</div><div class="d">6xxx · 30xxx</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="50"><div class="item-pill"><div class="t">절삭·연마공구</div><div class="d">엔드밀 · 드릴 · 인서트</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="100"><div class="item-pill"><div class="t">체결 부품</div><div class="d">볼트 · 너트 · 플랜지</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="150"><div class="item-pill"><div class="t">기계 요소</div><div class="d">감속기 · 커플링</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="200"><div class="item-pill"><div class="t">공압 · 유압</div><div class="d">밸브 · 피팅</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="250"><div class="item-pill"><div class="t">산업 소모품</div><div class="d">필터 · 연마재</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 진행 절차 -->
+    <section class="site-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-8 text-center" data-aos="fade-up">
+            <span class="section-eyebrow">How It Works</span>
+            <h2 class="site-section-heading">진행 절차</h2>
+            <p class="lead">쓰시는 형번만 알려주시면, 나머지는 저희가 처리합니다.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up"><div class="proc-step"><div class="proc-num">1</div><div class="pt">형번 · 수량<br>접수</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="50"><div class="proc-step alt"><div class="proc-num">2</div><div class="pt">공장 소싱<br>· 견적</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="100"><div class="proc-step"><div class="proc-num">3</div><div class="pt">샘플<br>· 검품</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="150"><div class="proc-step alt"><div class="proc-num">4</div><div class="pt">계약<br>· 발주</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="200"><div class="proc-step"><div class="proc-num">5</div><div class="pt">통관<br>· 배송</div></div></div>
+          <div class="col-6 col-md-4 col-lg-2 mb-4" data-aos="fade-up" data-aos-delay="250"><div class="proc-step alt"><div class="proc-num">6</div><div class="pt">납품<br>· 정산</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 역량 · 차별점 (QCD) -->
+    <section class="site-section border-bottom" style="background:#f7f8fb;">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-8 text-center" data-aos="fade-up">
+            <span class="section-eyebrow">Why BridgeArk</span>
+            <h2 class="site-section-heading">구매 검토 시 핵심 항목별 대응</h2>
+            <p class="lead">품질 &middot; 납기 &middot; 원가를 항목별로 관리합니다.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up"><div class="qcd-card"><div class="qk">품질 &middot; 등급 신뢰성</div><div class="qs">Quality</div><div class="qd">형번·등급(P6) 사양 그대로 매칭. 출하 전 검사성적서·재질증명·샘플 검증으로 사양 미달을 원천 차단합니다.</div></div></div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="60"><div class="qcd-card"><div class="qk">납기 안정성</div><div class="qs">Delivery</div><div class="qd">재고 보유 공장을 우선 소싱하고, 반복 품목은 예측 발주로 리드타임을 최소화합니다.</div></div></div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="120"><div class="qcd-card"><div class="qk">원가 경쟁력의 근거</div><div class="qs">Cost</div><div class="qd">중국 공장 직거래로 중간 유통 마진만 제거합니다. 품질을 낮춘 것이 아니라 유통 단계를 줄인 것입니다.</div></div></div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="0"><div class="qcd-card"><div class="qk">공급 지속성 &middot; 사후 대응</div><div class="qs">Reliability</div><div class="qd">지속 거래를 전제로 운영하며, 문제 발생 시 공장과 신속하게 공동 대응합니다.</div></div></div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="60"><div class="qcd-card"><div class="qk">현지 소통 &middot; 검증 역량</div><div class="qs">Communication</div><div class="qd">한·중 각 10년 이상 거주 경험을 기반으로, 원어민 수준으로 공장과 직접 소통·협상합니다.</div></div></div>
+          <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="120"><div class="qcd-card" style="border-left-color:var(--navy); background:#fbf7ef;"><div class="qk">시작은 샘플부터</div><div class="qs">Low Risk</div><div class="qd">소량 시험 발주로 품질·납기를 먼저 확인하신 뒤 확대하실 수 있습니다. 부담 없이 시작하세요.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 핵심 인력 -->
+    <div class="site-section" id="team">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center" data-aos="fade-up">
+            <span class="section-eyebrow">Team</span>
+            <h2 class="site-section-heading">핵심 인력</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+            <div class="person text-center bg-white p-4">
+              <h3>Lee Ho Jin | Founder</h3>
+              <p class="position text-muted">Managing Partner</p>
+              <p class="text-muted small">서강대학교 학사·석사 (Sogang Univ.)</p>
+              <p class="text-muted small">사모펀드 운용 · 기관투자 · 재무전략 배경</p>
+              <p class="text-muted small">한국·중국 각 10년 이상 거주 경험 (현지 네트워크)</p>
+              <p class="text-muted small">언어: 한국어 · 中文 · English</p>
+              <p class="mb-0">중국 공장 소싱·검품과 거래 구조 설계를 담당합니다. 형번 접수부터 통관·정산까지 전 과정을 관리합니다.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+            <div class="person text-center bg-white p-4">
+              <h3>Seol Ji Min | Partner</h3>
+              <p class="position text-muted">Managing Partner</p>
+              <p class="text-muted small">한국외국어대학교 학사 (HUFS)</p>
+              <p class="text-muted small">한·중 수출입 · 물류 전문</p>
+              <p class="text-muted small">한국·중국 각 10년 이상 거주 경험 (현지 네트워크)</p>
+              <p class="text-muted small">언어: 한국어 · 中文 · English</p>
+              <p class="mb-0">중국 현지 커뮤니케이션과 물류·운영을 담당합니다. 공장 협상과 검품 실행을 지원합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA / 문의 -->
+    <section class="trade-cta" id="trade-contact">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-9" data-aos="fade-up">
+            <h2>쓰시는 형번을 알려주시면, 현 단가 대비 비교 견적을 드립니다.</h2>
+            <p>품질은 그대로 &middot; 검증은 샘플부터</p>
+            <a href="mailto:info@bridgeark.com" class="btn btn-gold"><span class="icon-envelope mr-2"></span> info@bridgeark.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-5">
+                <h2 class="footer-heading mb-4">BridgeArk</h2>
+                <p>한국과 중국을 잇는 비즈니스 브릿지입니다. 무역 소싱, 광고 협업, 사업 개발 및 파트너십 구축을 지원합니다.</p>
+              </div>
+              <div class="col-md-3 ml-auto">
+                <h2 class="footer-heading mb-4">바로가기</h2>
+                <ul class="list-unstyled">
+                  <li><a href="trade.html">무역 소싱</a></li>
+                  <li><a href="index.html#services-section">광고·마케팅</a></li>
+                  <li><a href="index.html#about-section">소개</a></li>
+                  <li><a href="index.html#contact-section">문의하기</a></li>
+                </ul>
+              </div>
+              <div class="col-md-3">
+                <h2 class="footer-heading mb-4">팔로우</h2>
+                <a href="#" class="pl-0 pr-3"><span class="icon-instagram"></span></a>
+                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h2 class="footer-heading mb-4">문의</h2>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="mailto:info@bridgeark.com"><span class="icon-envelope mr-2"></span>info@bridgeark.com</a></li>
+            </ul>
+            <p class="mb-0">쓰시는 형번을 알려주시면<br>비교 견적을 드립니다.</p>
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. BridgeArk. All Rights Reserved. &mdash; Template by <a href="https://untree.co">Untree.co</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.sticky.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    AOS.init({ duration: 800, easing: 'slide', once: true });
+  </script>
+</body>
+</html>
